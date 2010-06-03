@@ -2,15 +2,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:sdp="http://schemas.seesmic.com/sdp/2010/deployment">
     <sdp:Plugin>
-        <sdp:Id>GUID_HERE</sdp:Id>
+        <sdp:Id>bc32900d-a9d0-4ac1-a684-98fb9a4d2c19</sdp:Id>
         <sdp:Name>PitchifyPlugin</sdp:Name>
-        <sdp:Description>DISPLAY DESCRIPTION</sdp:Description>
+        <sdp:Description>Displays entries from Pitchify in Seesmic Desktop 2</sdp:Description>
         <sdp:Version>1.0.0.0</sdp:Version>
-        <sdp:Vendor>YOUR NAME</sdp:Vendor>
-        <sdp:Copyright>COPYRIGHT</sdp:Copyright>
-        <sdp:HomepageUrl>URI</sdp:HomepageUrl>
+        <sdp:Vendor>Geir-Tore Lindsve</sdp:Vendor>
+        <sdp:Copyright>MS-PL</sdp:Copyright>
+        <sdp:HomepageUrl>http://lindsve.net</sdp:HomepageUrl>
         <sdp:LogoUri></sdp:LogoUri>
-        <sdp:PlatformVersion>0.5</sdp:PlatformVersion>
+        <sdp:PlatformVersion>0.8</sdp:PlatformVersion>
     </sdp:Plugin>
     <Deployment.Parts>
     </Deployment.Parts>
