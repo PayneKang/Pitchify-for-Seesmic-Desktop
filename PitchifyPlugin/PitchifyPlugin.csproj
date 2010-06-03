@@ -108,6 +108,6 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>copy /y "$(TargetDir)$(TargetName).xap" "%25HOMEDRIVE%25%25HOMEPATH%25\My Documents\Seesmic\Seesmic Desktop 2\Plugins"</PostBuildEvent>
+    <PostBuildEvent>copy /y "$(TargetDir)$(TargetName).xap" "%25HOMEDRIVE%25%25HOMEPATH%25\Documents\Seesmic\Seesmic Desktop 2\Plugins"</PostBuildEvent>
   </PropertyGroup>
 </Project>
