@@ -16,6 +16,7 @@ namespace PitchifyPlugin
     [Export(typeof(IPlugin))]
     public class PitchifyPlugin : IPlugin
     {
+        internal static Guid PluginId = new Guid("bc32900d-a9d0-4ac1-a684-98fb9a4d2c19");
         #region Constructors
         private static readonly ResourceDictionary TemplateResources;
 
@@ -73,12 +74,12 @@ namespace PitchifyPlugin
 
         public Guid Id
         {
-            get { throw new NotImplementedException(); }
+            get { return PluginId; }
         }
 
         public void Initialize()
         {
-            throw new NotImplementedException();
+
         }
 
         public void RevertSettings()
@@ -88,7 +89,7 @@ namespace PitchifyPlugin
 
         public DataTemplate SettingsTemplate
         {
-            get { throw new NotImplementedException(); }
+            get { return null; }
         }
         #endregion
     }
