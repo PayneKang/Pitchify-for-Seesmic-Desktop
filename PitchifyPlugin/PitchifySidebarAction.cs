@@ -5,14 +5,17 @@ namespace PitchifyPlugin
 {
     public class PitchifySidebarAction : SidebarAction
     {
-        public PitchifySidebarAction()
+        private ITimeline _timeline;
+
+        public PitchifySidebarAction(ITimeline timeline)
         {
+            _timeline = timeline;
             Text = "Pitchify";
         }
 
         public override void Invoke(SidebarActionContext context)
         {
-
+            context.Space.AddTimelineColumn(this, _timeline, "Pitchify", null);
         }
     }
 }
