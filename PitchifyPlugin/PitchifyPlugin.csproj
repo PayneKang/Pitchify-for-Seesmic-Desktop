@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PitchifyDataProvider.cs" />
+    <Compile Include="PitchifyReview.cs" />
     <Compile Include="PitchifySidebarAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PitchifyPlugin.cs" />
@@ -111,6 +112,6 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>copy /y "$(TargetDir)$(TargetName).xap" "%25HOMEDRIVE%25%25HOMEPATH%25\Documents\Seesmic\Seesmic Desktop 2\Plugins"</PostBuildEvent>
+    <PostBuildEvent>copy /y "$(TargetDir)$(TargetName).xap" "D:\Bruker_data\My Documents\Seesmic\Seesmic Desktop 2\Plugins"</PostBuildEvent>
   </PropertyGroup>
 </Project>
