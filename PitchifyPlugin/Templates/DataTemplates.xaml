@@ -1,9 +1,16 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:utils="clr-namespace:Seesmic.Sdp.Utils;assembly=Seesmic.Sdp.Utils">
 
     <DataTemplate x:Key="SmallLogoTemplate"></DataTemplate>
 
     <DataTemplate x:Key="LargeLogoTemplate"></DataTemplate>
-    
+
+    <DataTemplate x:Key="TimelineItemTemplate">
+        <StackPanel>
+            <TextBlock Text="{Binding Path=Text}" />
+            <utils:MetadataControl />
+        </StackPanel>
+    </DataTemplate>
+
 </ResourceDictionary>
