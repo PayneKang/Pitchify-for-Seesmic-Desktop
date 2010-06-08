@@ -96,6 +96,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Assets\favicon.ico" />
+    <Content Include="feed.xml" />
     <Resource Include="Assets\MainLogoAdj.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
@@ -114,6 +115,6 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>copy /y "$(TargetDir)$(TargetName).xap" "D:\Bruker_data\My Documents\Seesmic\Seesmic Desktop 2\Plugins"</PostBuildEvent>
+    <PostBuildEvent>copy /y "$(TargetDir)$(TargetName).xap" "C:\Users\Geir-Tore\Documents\Seesmic\Seesmic Desktop 2\Plugins"</PostBuildEvent>
   </PropertyGroup>
 </Project>
