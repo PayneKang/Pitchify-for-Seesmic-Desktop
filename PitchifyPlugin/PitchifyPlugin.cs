@@ -86,12 +86,19 @@ namespace PitchifyPlugin
 
         internal static DataTemplate TimelineItemTemplate
         {
-            get
-            {
-                return (DataTemplate)TemplateResources["TimelineItemTemplate"];
-            }
+            get { return (DataTemplate)TemplateResources["TimelineItemTemplate"]; }
         }
 
         #endregion
+
+        internal static void LogInfo(string message)
+        {
+            LogService.Info(string.Format("Plugin: PitchifyPlugin: {0}", message));
+        }
+
+        internal static void LogError(Exception ex)
+        {
+            LogService.Error("Plugin: PitchifyPlugin: ", ex);
+        }
     }
 }

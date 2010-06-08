@@ -8,8 +8,7 @@ namespace PitchifyPlugin
     {
         public PitchifyReview()
         {
-            Id = Guid.NewGuid().ToString();
-            Text = "Pitchify";
+            Text = "Foobar";
         }
 
         public string Id { get; set; }
@@ -18,9 +17,16 @@ namespace PitchifyPlugin
 
         public string Text { get; set; }
 
-        public Uri AvatarUri { get { return null; } }
+        public Uri AvatarUri { get; set; }
 
-        public DataTemplate Template { get { return PitchifyPlugin.TimelineItemTemplate; } }
+        public DataTemplate Template
+        {
+            get
+            {
+                PitchifyPlugin.LogInfo("GetTemplate");
+                return PitchifyPlugin.TimelineItemTemplate;
+            }
+        }
 
         public DataTemplate NotificationTemplate { get { return null; } }
 
