@@ -3,15 +3,27 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:utils="clr-namespace:Seesmic.Sdp.Utils;assembly=Seesmic.Sdp.Utils">
 
-    <!--<DataTemplate x:Key="SmallLogoTemplate"></DataTemplate>
+    <DataTemplate x:Key="SmallLogoTemplate"></DataTemplate>
 
-    <DataTemplate x:Key="LargeLogoTemplate"></DataTemplate>-->
+    <DataTemplate x:Key="LargeLogoTemplate"></DataTemplate>
 
     <DataTemplate x:Key="TimelineItemTemplate">
         <StackPanel>
             <TextBlock Text="{Binding Path=Username}" FontWeight="Bold" />
-            <TextBlock Text="{Binding Path=Text}" />
-            <HyperlinkButton Content="Open in Spotify" FontSize="10" NavigateUri="{Binding Path=SpotifyUri}" />
+            <RichTextBox IsReadOnly="True" BorderBrush="Transparent" Background="Transparent" TextWrapping="Wrap">
+                <Paragraph>
+                    <Span utils:TextRenderer.Source="{Binding}" />
+                </Paragraph>
+            </RichTextBox>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <HyperlinkButton Grid.Column="0" Content="Open in Spotify" NavigateUri="{Binding Path=SpotifyUri}" />
+                <HyperlinkButton Grid.Column="1" Content="Details" NavigateUri="http://google.com" />
+            </Grid>
+            <TextBlock Text="{Binding Path=DateTimeText}" FontSize="10" />
         </StackPanel>
     </DataTemplate>
 

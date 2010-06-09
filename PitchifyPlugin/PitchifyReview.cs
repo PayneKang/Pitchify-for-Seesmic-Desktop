@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using Seesmic.Sdp.Extensibility;
+using Seesmic.Sdp.Utils;
 
 namespace PitchifyPlugin
 {
@@ -26,6 +27,11 @@ namespace PitchifyPlugin
         public DataTemplate NotificationTemplate { get { return null; } }
 
         public DateTimeOffset DateTime { get; set; }
+
+        public string DateTimeText
+        {
+            get { return "Added " + MetadataControl.DateTimeToFriendlyString(this.DateTime.UtcDateTime, false); }
+        }
 
         public GeoLocation GeoLocation { get { return null; } }
     }
