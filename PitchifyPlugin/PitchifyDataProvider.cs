@@ -2,7 +2,10 @@ using System;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Net;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
+using System.Windows.Browser;
 using System.Xml.Linq;
 using Seesmic.Sdp.Extensibility;
 using Seesmic.Sdp.Utils;
@@ -26,11 +29,18 @@ namespace PitchifyPlugin
 
         private void OnTimerTick(object state)
         {
-            var client = new WebClient();
-            var uri = new Uri(@"http://feeds.feedburner.com/Pitchify");
+            try
+            {
+                var client = new WebClient();
+                var uri = new Uri(@"http://feeds.feedburner.com/Pitchify");
 
-            client.OpenReadAsync(uri);
-            client.OpenReadCompleted += FeedRetrieved;
+                client.OpenReadAsync(uri);
+                client.OpenReadCompleted += FeedRetrieved;
+            }
+            catch (Exception ex)
+            {
+                PitchifyPlugin.LogError(ex);
+            }
         }
 
         private void FeedRetrieved(object sender, OpenReadCompletedEventArgs e)
