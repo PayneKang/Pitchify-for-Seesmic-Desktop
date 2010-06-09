@@ -4,7 +4,7 @@ using Seesmic.Sdp.Extensibility;
 
 namespace PitchifyPlugin
 {
-    internal class PitchifyReview : ITimelineItem
+    public class PitchifyReview : ITimelineItem
     {
         public PitchifyReview()
         {
@@ -17,16 +17,11 @@ namespace PitchifyPlugin
 
         public string Text { get; set; }
 
+        public Uri SpotifyUri { get; set; }
+
         public Uri AvatarUri { get; set; }
 
-        public DataTemplate Template
-        {
-            get
-            {
-                PitchifyPlugin.LogInfo("GetTemplate");
-                return PitchifyPlugin.TimelineItemTemplate;
-            }
-        }
+        public DataTemplate Template { get { return PitchifyPlugin.TimelineItemTemplate; } }
 
         public DataTemplate NotificationTemplate { get { return null; } }
 
