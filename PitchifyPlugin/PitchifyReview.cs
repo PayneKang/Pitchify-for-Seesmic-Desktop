@@ -20,6 +20,8 @@ namespace PitchifyPlugin
 
         public Uri SpotifyUri { get; set; }
 
+        public Uri DetailsUri { get; set; }
+
         public Uri AvatarUri { get; set; }
 
         public DataTemplate Template { get { return PitchifyPlugin.TimelineItemTemplate; } }
