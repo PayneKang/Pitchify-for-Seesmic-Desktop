@@ -59,6 +59,7 @@ namespace PitchifyPlugin
                                   Username = entry.Element("title").Value,
                                   Text = GetTextFromEntry(entry.Element("description").Value),
                                   SpotifyUri = GetSpotifyLink(entry.Element("description").Value),
+                                  DetailsUri = GetDetailsLink(entry.Element("description").Value),
                                   AvatarUri = new Uri(entry.Element(a10 + "link").Attribute("href").Value),
                                   DateTime = DateTime.Parse(entry.Element(a10 + "updated").Value)
                               };
@@ -84,10 +85,19 @@ namespace PitchifyPlugin
             return text.ToString();
         }
 
-        private Regex spotifyLinkRegex = new Regex(@"http://open.spotify.com/\w+/\w+");
+        private Regex spotifyLinkRegex = new Regex(@"http://open.spotify.com/\w+/(?<id>\w+)");
         private Uri GetSpotifyLink(string description)
         {
             Match link = spotifyLinkRegex.Match(description);
+            var uri = new Uri(link.Success ? string.Format("spotify:album:{0}", link.Groups["id"].Value) : string.Empty);
+            PitchifyPlugin.LogInfo(uri.ToString());
+            return uri;
+        }
+
+        private Regex detailsRegex = new Regex("http://pitchify.com/albums/[^\"]+");
+        private Uri GetDetailsLink(string description)
+        {
+            Match link = detailsRegex.Match(description);
             var uri = new Uri(link.Success ? link.Value : string.Empty);
             return uri;
         }
