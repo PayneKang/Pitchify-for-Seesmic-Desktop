@@ -55,18 +55,16 @@ namespace PitchifyPlugin
                 var entries = from entry in xml.Descendants("item")
                               select new PitchifyReview
                               {
-                                  Id = GetGuidFromEntryId(entry.Element("guid").Value),
+                                  Id = "pitchify-" + entry.Element("guid").Value,
                                   Username = entry.Element("title").Value,
+                                  Text = GetTextFromEntry(entry.Element("description").Value),
+                                  SpotifyUri = GetSpotifyLink(entry.Element("description").Value),
                                   AvatarUri = new Uri(entry.Element(a10 + "link").Attribute("href").Value),
                                   DateTime = DateTime.Parse(entry.Element(a10 + "updated").Value)
                               };
 
-                foreach (var pitchifyReview in entries.First())
+                foreach (var pitchifyReview in entries)
                 {
-                    PitchifyPlugin.LogInfo("Id: " + pitchifyReview.Id);
-                    PitchifyPlugin.LogInfo("Username: " + pitchifyReview.Username);
-                    PitchifyPlugin.LogInfo("Image: " + pitchifyReview.AvatarUri);
-                    PitchifyPlugin.LogInfo("Datetime: " + pitchifyReview.DateTime.ToString());
                     SynchronizationHelper.Post(OnItemAdded, new TimelineItemEventArgs(new TimelineItemContainer(pitchifyReview)));
                 }
             }
@@ -76,10 +74,57 @@ namespace PitchifyPlugin
             }
         }
 
-        private string GetGuidFromEntryId(string entryId)
+        private string GetTextFromEntry(string description)
         {
-            var guid = Guid.NewGuid().ToString();
-            return new Guid(guid.Substring(0, "bc32900d-a9d0-4ac1-a684-98fb9a4d2c19".Length - entryId.Length) + entryId).ToString();
+            description = StripHtmlTags(description);
+
+            var text = new StringBuilder();
+            text.AppendFormat("{0}\n", GetAverageRating(description));
+            text.AppendFormat("Available in: \n{0}", GetAvailability(description));
+            return text.ToString();
+        }
+
+        private Regex spotifyLinkRegex = new Regex(@"http://open.spotify.com/\w+/\w+");
+        private Uri GetSpotifyLink(string description)
+        {
+            Match link = spotifyLinkRegex.Match(description);
+            var uri = new Uri(link.Success ? link.Value : string.Empty);
+            return uri;
+        }
+
+        private Regex availabilityRegex = new Regex(@"\(.*\)");
+        private string GetAvailability(string description)
+        {
+            string availability = "All countries";
+            if (description.Contains("Restricted availability"))
+            {
+                Match match = availabilityRegex.Match(description);
+                availability = match.Success ? match.Value.Substring(1, match.Value.Length - 2) : "Failed to parse restricted availability";
+            }
+            return availability;
+        }
+
+        private Regex averageRatingRegex = new Regex("Average rating: [0-9.]+");
+        private string GetAverageRating(string description)
+        {
+            Match averageRating = averageRatingRegex.Match(description);
+
+            return averageRating.Success
+                ? averageRating.Value
+                : "Failed to parse average rating";
+        }
+
+        private string StripHtmlTags(string value)
+        {
+            int length = 0;
+            int.TryParse(value, out length);
+            string formattedValue = Regex.Replace(value as string, "<.*?>", "");
+            formattedValue = Regex.Replace(formattedValue, @"\n+\s+", "\n\n");
+            formattedValue = formattedValue.TrimStart(' ');
+            formattedValue = HttpUtility.HtmlDecode(formattedValue);
+            if (length > 0 && formattedValue.Length >= length)
+                formattedValue = formattedValue.Substring(0, length - 1);
+            return formattedValue;
         }
 
         private void OnItemAdded(TimelineItemEventArgs e)
