@@ -15,9 +15,7 @@ namespace PitchifyPlugin
         public PitchifyPlugin() { }
         static PitchifyPlugin()
         {
-            var templates = new ResourceDictionary();
-            templates.Source = new Uri("/PitchifyPlugin;component/Templates/DataTemplates.xaml", UriKind.Relative);
-            TemplateResources = templates;
+            TemplateResources = new ResourceDictionary { Source = new Uri("/PitchifyPlugin;component/Templates/DataTemplates.xaml", UriKind.Relative) };
         }
         #endregion
 
@@ -31,31 +29,22 @@ namespace PitchifyPlugin
 
         #region Shell Imports
         private static IShellService _shell;
-        private static INotificationService _notify;
         private static ILogService _log;
-        private static IStorageService _storage;
-        private static IPostingService _posting;
-
-        [Import]
-        public IPostingService PostingServiceImport { set { _posting = value; } }
+        private static ISessionService _session;
 
         [Import]
         public IShellService ShellServiceImport { set { _shell = value; } }
 
         [Import]
-        public INotificationService NotificationServiceImport { set { _notify = value; } }
+        public ISessionService SessionServiceImport { set { _session = value; } }
 
         [Import]
         public ILogService LogServiceImport { set { _log = value; } }
 
-        [Import]
-        public IStorageService StorageServiceImport { set { _storage = value; } }
-
+        public static ISessionService SessionService { get { return _session; } }
         public static IShellService ShellService { get { return _shell; } }
         public static ILogService LogService { get { return _log; } }
-        public static INotificationService NotifyService { get { return _notify; } }
-        public static IStorageService StorageService { get { return _storage; } }
-        public static IPostingService PostingService { get { return _posting; } }
+
         #endregion
 
         #region IPlugin Implementations
