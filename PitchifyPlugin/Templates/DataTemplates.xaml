@@ -21,7 +21,7 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <HyperlinkButton Grid.Column="0" Content="Open in Spotify" NavigateUri="{Binding Path=SpotifyUri}" />
-                <HyperlinkButton Grid.Column="1" Content="Details" NavigateUri="http://google.com" />
+                <HyperlinkButton Grid.Column="1" Content="Details" NavigateUri="{Binding Path=DetailsUri}" />
             </Grid>
             <TextBlock Text="{Binding Path=DateTimeText}" FontSize="10" />
         </StackPanel>
