@@ -105,7 +105,6 @@
     <Resource Include="Assets\flags\nl.png" />
     <Resource Include="Assets\flags\no.png" />
     <Resource Include="Assets\flags\se.png" />
-    <Content Include="feed.xml" />
     <Resource Include="Assets\MainLogoAdj.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
