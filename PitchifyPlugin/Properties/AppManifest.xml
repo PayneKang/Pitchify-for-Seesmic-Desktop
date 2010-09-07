@@ -1,17 +1,18 @@
 ﻿<Deployment xmlns="http://schemas.microsoft.com/client/2007/deployment"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:sdp="http://schemas.seesmic.com/sdp/2010/deployment">
-    <sdp:Plugin>
-        <sdp:Id>bc32900d-a9d0-4ac1-a684-98fb9a4d2c19</sdp:Id>
-        <sdp:Name>PitchifyPlugin</sdp:Name>
-        <sdp:Description>Displays entries from Pitchify in Seesmic Desktop 2</sdp:Description>
-        <sdp:Version>1.0.0.0</sdp:Version>
-        <sdp:Vendor>Geir-Tore Lindsve</sdp:Vendor>
-        <sdp:Copyright>MS-PL</sdp:Copyright>
-        <sdp:HomepageUrl>http://lindsve.net</sdp:HomepageUrl>
-        <sdp:LogoUri></sdp:LogoUri>
-        <sdp:PlatformVersion>0.8</sdp:PlatformVersion>
-    </sdp:Plugin>
+        xmlns:s="http://schemas.seesmic.com/sdp/2010/deployment">
+    <s:Plugin>
+        <s:Id>bc32900d-a9d0-4ac1-a684-98fb9a4d2c19</s:Id>
+        <s:Name>Pitchify for Seesmic Desktop</s:Name>
+        <s:Description>Pitchify collects high rating reviews from the two excellent webzines Pitchfork and Drowned In Sound on a daily basis and checks if they are available in Spotify. This plugin displays these album listings in Seesmic Desktop</s:Description>
+        <s:Version>1.0.0.0</s:Version>
+        <s:LogoUri>logo.png</s:LogoUri>
+        <s:Vendor>Geir-Tore Lindsve</s:Vendor>
+        <s:Copyright>MS-PL</s:Copyright>
+        <s:HomepageUrl>http://github.com/lindsve/PitchifyPlugin</s:HomepageUrl>
+        <s:PlatformVersion>1.0.0</s:PlatformVersion>
+        <s:UpdatesManifestUrl>http://lindsve.net/update/pitchify.xml</s:UpdatesManifestUrl>
+    </s:Plugin>
     <Deployment.Parts>
     </Deployment.Parts>
 </Deployment>
