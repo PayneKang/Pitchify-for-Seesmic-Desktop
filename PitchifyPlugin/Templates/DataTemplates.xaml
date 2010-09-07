@@ -1,20 +1,40 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-    xmlns:utils="clr-namespace:Seesmic.Sdp.Utils;assembly=Seesmic.Sdp.Utils">
+    xmlns:utils="clr-namespace:Seesmic.Sdp.Utils;assembly=Seesmic.Sdp.Utils"
+    xmlns:converters="clr-namespace:PitchifyPlugin.Converters">
 
+    <converters:NullToVisibilityConverter x:Key="nullToVisibilityConverter" />
+    <converters:ReversedNullToVisibilityConverter x:Key="reversedNullToVisibilityConverter" />
+    
     <DataTemplate x:Key="SmallLogoTemplate"></DataTemplate>
 
     <DataTemplate x:Key="LargeLogoTemplate"></DataTemplate>
 
     <DataTemplate x:Key="TimelineItemTemplate">
         <StackPanel>
-            <TextBlock Text="{Binding Path=Username}" FontWeight="Bold" />
+            <TextBlock Text="{Binding Path=Username}" FontWeight="Bold" TextWrapping="Wrap" />
             <RichTextBox IsReadOnly="True" BorderBrush="Transparent" Background="Transparent" TextWrapping="Wrap">
                 <Paragraph>
                     <Span utils:TextRenderer.Source="{Binding}" />
                 </Paragraph>
             </RichTextBox>
+            <TextBlock Text="Available in: All countries" Visibility="{Binding Restrictions, Converter={StaticResource reversedNullToVisibilityConverter}}" />
+            <StackPanel Orientation="Horizontal" Visibility="{Binding Restrictions, Converter={StaticResource nullToVisibilityConverter}}">
+                <TextBlock Text="Available in:" />
+                <ItemsControl ItemsSource="{Binding Restrictions}" Background="Transparent" BorderThickness="0">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding}" Margin="2,0" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />

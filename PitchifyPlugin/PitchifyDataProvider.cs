@@ -53,6 +53,7 @@ namespace PitchifyPlugin
             var xml = XDocument.Load(stream);
 
             XNamespace a10 = "http://www.w3.org/2005/Atom";
+            XNamespace feedburner = "http://rssnamespace.org/feedburner/ext/1.0";
 
             try
             {
@@ -62,8 +63,9 @@ namespace PitchifyPlugin
                                   Id = "pitchify-" + entry.Element("guid").Value,
                                   Username = entry.Element("title").Value,
                                   Text = GetTextFromEntry(entry.Element("description").Value),
+                                  Restrictions = GetRestrictions(entry.Element("description").Value),
                                   SpotifyUri = GetSpotifyLink(entry.Element("description").Value),
-                                  DetailsUri = GetDetailsLink(entry.Element("description").Value),
+                                  DetailsUri = new Uri(entry.Element(feedburner + "origLink").Value),
                                   AvatarUri = new Uri(entry.Element(a10 + "link").Attribute("href").Value),
                                   DateTime = DateTimeOffset.Parse(entry.Element(a10 + "updated").Value)
                               };
@@ -85,7 +87,6 @@ namespace PitchifyPlugin
 
             var text = new StringBuilder();
             text.AppendFormat("{0}\n", GetAverageRating(description));
-            text.AppendFormat("Available in: \n{0}", GetAvailability(description));
             return text.ToString();
         }
 
@@ -93,26 +94,61 @@ namespace PitchifyPlugin
         private Uri GetSpotifyLink(string description)
         {
             Match link = spotifyLinkRegex.Match(description);
-            var uri = new Uri(link.Success ? string.Format("spotify:album:{0}", link.Groups["id"].Value) : string.Empty);
+            var uri = new Uri(link.Success ? link.Value : string.Empty);
             PitchifyPlugin.LogInfo(uri.ToString());
             return uri;
         }
 
-        private Regex detailsRegex = new Regex("http://pitchify.com/albums/[^\"]+");
-        private Uri GetDetailsLink(string description)
+        public IList<string> GetRestrictions(string description)
         {
-            Match link = detailsRegex.Match(description);
-            var uri = new Uri(link.Success ? link.Value : string.Empty);
-            return uri;
+            var flags = new List<string>();
+            var availability = GetAvailability(description);
+            if (string.IsNullOrEmpty(availability))
+                return flags;
+
+            var countries = availability.Split(',');
+            flags.AddRange(countries.Select(country => GetFlag(country.Trim())));
+            return flags;
+        }
+
+        private string GetFlag(string country)
+        {
+            string source = string.Empty;
+            switch (country)
+            {
+                case "Spain":
+                    source = "/PitchifyPlugin;component/Assets/flags/es.png";
+                    break;
+                case "Finland":
+                    source = "/PitchifyPlugin;component/Assets/flags/fi.png";
+                    break;
+                case "France":
+                    source = "/PitchifyPlugin;component/Assets/flags/fr.png";
+                    break;
+                case "Great Britain":
+                    source = "/PitchifyPlugin;component/Assets/flags/gb.png";
+                    break;
+                case "Netherlands":
+                    source = "/PitchifyPlugin;component/Assets/flags/nl.png";
+                    break;
+                case "Norway":
+                    source = "/PitchifyPlugin;component/Assets/flags/no.png";
+                    break;
+                case "Sweden":
+                    source = "/PitchifyPlugin;component/Assets/flags/se.png";
+                    break;
+            }
+            return source;
         }
 
         private Regex availabilityRegex = new Regex(@"\(.*\)");
         private string GetAvailability(string description)
         {
-            string availability = "All countries";
+            string availability = string.Empty;
             if (description.Contains("Restricted availability"))
             {
-                Match match = availabilityRegex.Match(description);
+                var substring = description.Substring(description.IndexOf("Restricted availability"));
+                Match match = availabilityRegex.Match(substring);
                 availability = match.Success ? match.Value.Substring(1, match.Value.Length - 2) : "Failed to parse restricted availability";
             }
             return availability;

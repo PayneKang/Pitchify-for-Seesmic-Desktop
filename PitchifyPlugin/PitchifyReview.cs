@@ -20,6 +20,8 @@ namespace PitchifyPlugin
 
         public string Text { get; set; }
 
+        public IList<string> Restrictions { get; set; }
+
         public Uri SpotifyUri { get; set; }
 
         public Uri DetailsUri { get; set; }

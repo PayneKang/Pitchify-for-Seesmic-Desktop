@@ -79,6 +79,7 @@
     <Reference Include="System.Xml.Linq, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="PitchifyDataProvider.cs" />
     <Compile Include="PitchifyReview.cs" />
     <Compile Include="PitchifySidebarAction.cs" />
@@ -97,6 +98,13 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Assets\favicon.ico" />
+    <Resource Include="Assets\flags\es.png" />
+    <Resource Include="Assets\flags\fi.png" />
+    <Resource Include="Assets\flags\fr.png" />
+    <Resource Include="Assets\flags\gb.png" />
+    <Resource Include="Assets\flags\nl.png" />
+    <Resource Include="Assets\flags\no.png" />
+    <Resource Include="Assets\flags\se.png" />
     <Content Include="feed.xml" />
     <Resource Include="Assets\MainLogoAdj.png" />
   </ItemGroup>
