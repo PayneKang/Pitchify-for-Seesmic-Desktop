@@ -3,6 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PitchifyPlugin", "PitchifyPlugin\PitchifyPlugin.csproj", "{E1D79C2D-088D-4241-BE39-56B80D63BD0D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{12D5399C-2274-4B86-85FF-45BD597EC5F2}"
+	ProjectSection(SolutionItems) = preProject
+		lib\Seesmic.Sdp.Extensibility.dll = lib\Seesmic.Sdp.Extensibility.dll
+		lib\Seesmic.Sdp.Plugins.SharedFeatures.dll = lib\Seesmic.Sdp.Plugins.SharedFeatures.dll
+		lib\Seesmic.Sdp.Utils.dll = lib\Seesmic.Sdp.Utils.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverlightClassLibrary1", "SilverlightClassLibrary1\SilverlightClassLibrary1.csproj", "{D2129258-332B-4A87-A5CC-FF5E3728020D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +22,10 @@ Global
 		{E1D79C2D-088D-4241-BE39-56B80D63BD0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1D79C2D-088D-4241-BE39-56B80D63BD0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1D79C2D-088D-4241-BE39-56B80D63BD0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2129258-332B-4A87-A5CC-FF5E3728020D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2129258-332B-4A87-A5CC-FF5E3728020D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2129258-332B-4A87-A5CC-FF5E3728020D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2129258-332B-4A87-A5CC-FF5E3728020D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
