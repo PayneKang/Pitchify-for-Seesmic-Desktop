@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Media;
 using Seesmic.Sdp.Extensibility;
 using Seesmic.Sdp.Utils;
 
@@ -32,7 +34,7 @@ namespace PitchifyPlugin
 
         public string DateTimeText
         {
-            get { return "Added " + MetadataControl.DateTimeToFriendlyString(this.DateTime.UtcDateTime, false); }
+            get { return "Added " + MetadataControl.DateTimeToFriendlyString(DateTime.DateTime, true); }
         }
 
         public GeoLocation GeoLocation { get { return null; } }

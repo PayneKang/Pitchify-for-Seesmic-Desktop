@@ -1,11 +1,15 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Windows;
 using System.Windows.Browser;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Xml.Linq;
 using Seesmic.Sdp.Extensibility;
 using Seesmic.Sdp.Utils;
@@ -61,7 +65,7 @@ namespace PitchifyPlugin
                                   SpotifyUri = GetSpotifyLink(entry.Element("description").Value),
                                   DetailsUri = GetDetailsLink(entry.Element("description").Value),
                                   AvatarUri = new Uri(entry.Element(a10 + "link").Attribute("href").Value),
-                                  DateTime = DateTime.Parse(entry.Element(a10 + "updated").Value)
+                                  DateTime = DateTimeOffset.Parse(entry.Element(a10 + "updated").Value)
                               };
 
                 foreach (var pitchifyReview in entries)
