@@ -95,9 +95,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="Assets\favicon.ico" />
+    <Content Include="Assets\PitchifyLogo80x40.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Assets\flags\es.png" />
     <Resource Include="Assets\flags\fi.png" />
     <Resource Include="Assets\flags\fr.png" />
@@ -105,7 +106,6 @@
     <Resource Include="Assets\flags\nl.png" />
     <Resource Include="Assets\flags\no.png" />
     <Resource Include="Assets\flags\se.png" />
-    <Resource Include="Assets\MainLogoAdj.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
