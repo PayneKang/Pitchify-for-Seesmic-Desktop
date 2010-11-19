@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <PluginUpdates xmlns="http://schemas.seesmic.com/sdp/2010/deployment">
-    <PluginUpdate PluginId="bc32900d-a9d0-4ac1-a684-98fb9a4d2c19" Version="1.0.0.0" PlatformVersion="1.0.0" Date="09/07/2010" Location="http://lindsve.net/update/PitchifyPlugin.xap">
+    <PluginUpdate PluginId="bc32900d-a9d0-4ac1-a684-98fb9a4d2c19" Version="1.0.1.0" PlatformVersion="1.0.0" Date="11/19/2010" Location="http://lindsve.net/update/PitchifyPlugin.xap">
         <PluginUpdate.Description>
-            What changed
+            Updated to read the changed feed format from Pitchify. Entries should make it into Seesmic Desktop now.
         </PluginUpdate.Description>
     </PluginUpdate>
 </PluginUpdates>

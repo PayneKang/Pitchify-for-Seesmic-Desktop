@@ -5,7 +5,7 @@
         <s:Id>bc32900d-a9d0-4ac1-a684-98fb9a4d2c19</s:Id>
         <s:Name>Pitchify for Seesmic Desktop</s:Name>
         <s:Description>Pitchify collects high rating reviews from the two excellent webzines Pitchfork and Drowned In Sound on a daily basis and checks if they are available in Spotify. This plugin displays these album listings in Seesmic Desktop</s:Description>
-        <s:Version>1.0.0.0</s:Version>
+        <s:Version>1.0.1.0</s:Version>
         <s:LogoUri>Assets/PitchifyLogo80x40.png</s:LogoUri>
         <s:Vendor>Geir-Tore Lindsve</s:Vendor>
         <s:Copyright>MS-PL</s:Copyright>
