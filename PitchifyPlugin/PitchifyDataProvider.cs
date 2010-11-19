@@ -52,23 +52,9 @@ namespace PitchifyPlugin
             var stream = e.Result;
             var xml = XDocument.Load(stream);
 
-            XNamespace a10 = "http://www.w3.org/2005/Atom";
-            XNamespace feedburner = "http://rssnamespace.org/feedburner/ext/1.0";
-
             try
             {
-                var entries = from entry in xml.Descendants("item")
-                              select new PitchifyReview
-                              {
-                                  Id = "pitchify-" + entry.Element("guid").Value,
-                                  Username = entry.Element("title").Value,
-                                  Text = GetTextFromEntry(entry.Element("description").Value),
-                                  Restrictions = GetRestrictions(entry.Element("description").Value),
-                                  SpotifyUri = GetSpotifyLink(entry.Element("description").Value),
-                                  DetailsUri = new Uri(entry.Element(feedburner + "origLink").Value),
-                                  AvatarUri = new Uri(entry.Element(a10 + "link").Attribute("href").Value),
-                                  DateTime = DateTimeOffset.Parse(entry.Element(a10 + "updated").Value)
-                              };
+                IEnumerable<PitchifyReview> entries = ParseFeed(xml);
 
                 foreach (var pitchifyReview in entries)
                 {
@@ -81,6 +67,38 @@ namespace PitchifyPlugin
             }
         }
 
+        public IEnumerable<PitchifyReview> ParseFeed(XDocument xml)
+        {
+            return xml.Descendants("item").Select(entry => ParseEntry(entry));
+        }
+
+        private PitchifyReview ParseEntry(XElement entry)
+        {
+            XNamespace a10 = "http://www.w3.org/2005/Atom";
+            XNamespace feedburner = "http://rssnamespace.org/feedburner/ext/1.0";
+
+            var id = "pitchify-" + entry.Element("guid").Value;
+            var username = entry.Element("title").Value;
+            var text = GetTextFromEntry(entry.Element("description").Value);
+            var restrictions = GetRestrictions(entry.Element("description").Value);
+            var spotifyUri = GetSpotifyLink(entry.Element("description").Value);
+            var detailsUri = new Uri(entry.Element(feedburner + "origLink").Value);
+            var avatarUri = GetAvatarUri(entry.Element("description").Value);
+            var datetime = DateTimeOffset.Parse(entry.Element(a10 + "updated").Value);
+
+            return new PitchifyReview
+            {
+                Id = id,
+                Username = username,
+                Text = text,
+                Restrictions = restrictions,
+                SpotifyUri = spotifyUri,
+                DetailsUri = detailsUri,
+                AvatarUri = avatarUri,
+                DateTime = datetime
+            };
+        }
+
         private string GetTextFromEntry(string description)
         {
             description = StripHtmlTags(description);
@@ -90,12 +108,36 @@ namespace PitchifyPlugin
             return text.ToString();
         }
 
-        private Regex spotifyLinkRegex = new Regex(@"http://open.spotify.com/\w+/(?<id>\w+)");
+        private Regex sourceUri = new Regex("src=\".[^ ]+\"");
+        private Uri GetAvatarUri(string description)
+        {
+            Match link = sourceUri.Match(description);
+            if (!link.Success)
+                return null;
+
+            Uri uri = null;
+            try
+            {
+                var substring = link.Value.Substring(5, link.Value.Length - 6);
+                uri = new Uri(substring);
+            }
+            catch (Exception ex)
+            {
+                PitchifyPlugin.LogError(ex);
+                return uri;
+            }
+
+            return uri;
+        }
+
+        private Regex openViaPitchifyRegex = new Regex(@"http://pitchify.com/albums/play/\w+/\w+");
         private Uri GetSpotifyLink(string description)
         {
-            Match link = spotifyLinkRegex.Match(description);
-            var uri = new Uri(link.Success ? link.Value : string.Empty);
-            PitchifyPlugin.LogInfo(uri.ToString());
+            Match link = openViaPitchifyRegex.Match(description);
+            if (!link.Success)
+                return null;
+
+            var uri = new Uri(link.Value);
             return uri;
         }
 
